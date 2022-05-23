@@ -1,0 +1,16 @@
+#app {
+    padding: 25px 0;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.container {
+    padding-left: 50px;
+    padding-right: 50px;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
