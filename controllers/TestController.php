@@ -6,7 +6,7 @@ use Yii;
 use yii\web\Controller;
 
 
-class TestController extends Controller
+class TestController extends AppController
 {
     public function actionTest($postId = null)
     {
