@@ -60,6 +60,14 @@ class PostController extends AppController
     public function actionForm()
     {
         $model = new TestForm();
+        if ($model->load(Yii::$app->request->post())) {
+            if ($model->validate()) {
+                
+            }
+            else {
+
+            }
+        }
 
         return $this->render('form', compact('model'));
     }

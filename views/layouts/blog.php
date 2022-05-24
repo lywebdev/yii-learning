@@ -8,7 +8,7 @@ AppAsset::register($this);
 
 <?php $this->beginPage() ?>
 <!doctype html>
-<html lang="ru">
+<html lang="<?= Yii::$app->language ?>">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport"
