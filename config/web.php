@@ -20,6 +20,7 @@ $config = [
         'request' => [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
             'cookieValidationKey' => 'APLAALOK5LhiP0lgesnHiPBko6Rf5Dpa',
+            'baseUrl' => '' // ДЛЯ ТОГО ЧТОБЫ ЗАПРОСЫ НЕ ШЛИ ЧЕРЕЗ WEB // !!!
         ],
         'cache' => [
             'class' => 'yii\caching\FileCache',
@@ -46,6 +47,24 @@ $config = [
                     'levels' => ['error', 'warning'],
                 ],
             ],
+        ],
+        'urlManager' => [
+            'enablePrettyUrl' => true, // ЧПУ
+            'showScriptName' => false, // Показывать ли имя скрипта (файл + расширение)
+            'enableStrictParsing' => false, // Если false - будет обрабатывать только то что в rules
+            'suffix' => '', // Что дописывать в конец маршрута
+            'rules' => [
+                [ // Отдельное правило для главной страницы
+                    'pattern' => '',
+                    'route' => 'site/index',
+                    'suffix' => ''
+                ],
+
+                'about' => 'site/about',
+
+                '<action:(about|contact|login)>' => 'site/<action>',
+//                '<action:\w+>' => 'site/<action>',
+            ]
         ],
         'db' => $db,
         /*

@@ -1,0 +1,1 @@
+categories view file, <?php echo $content; ?>

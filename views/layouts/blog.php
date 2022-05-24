@@ -2,6 +2,8 @@
 
 use app\assets\AppAsset;
 use yii\helpers\Html;
+use app\components\CategoriesWidget;
+use yii\helpers\Url;
 
 AppAsset::register($this);
 ?>
@@ -26,17 +28,25 @@ AppAsset::register($this);
         <h1>Blog</h1>
         <nav id="sidebar" class="sidebar">
             <ul>
+                <li><?= Html::a('Главная', Url::to('/')) ?></li>
                 <li><?= Html::a('Главная', '/') ?></li>
                 <li><?= Html::a('Блог', ['post/index']) ?></li>
             </ul>
         </nav>
     </header>
     <section id="content" class="content container">
+<!--        --><?php
+//            if (isset($this->blocks['block1'])) {
+//                echo $this->blocks['block1'];
+//            }
+//        ?>
+<!--        --><?php //echo CategoriesWidget::widget(['name' => 'Вася']); ?>
         <?php
-            if (isset($this->blocks['block1'])) {
-                echo $this->blocks['block1'];
-            }
+            CategoriesWidget::begin();
+            echo "widgetbody";
+            CategoriesWidget::end();
         ?>
+
 
         <?= $content ?>
     </section>

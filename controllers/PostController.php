@@ -2,7 +2,10 @@
 
 namespace app\controllers;
 
+use app\models\Category;
+use app\models\Post;
 use Yii;
+use yii\helpers\BaseVarDumper;
 use yii\web\Response;
 use app\models\TestForm;
 
@@ -39,6 +42,8 @@ class PostController extends AppController
             return json_encode($this->posts);
         }
 
+        $categories = Category::find()->with(['posts'])->all();
+
         $this->view->title = "Статьи";
         $this->view->registerMetaTag([
             'name' => 'keywords',
@@ -49,7 +54,7 @@ class PostController extends AppController
             'content' => 'Самые информативные статьи!..'
         ]);
 
-        return $this->render('index', ['posts' => $this->posts]);
+        return $this->render('index', ['categories' => $categories]);
     }
 
     public function actionShow()
@@ -60,15 +65,20 @@ class PostController extends AppController
     public function actionForm()
     {
         $model = new TestForm();
-        if ($model->load(Yii::$app->request->post())) {
-            if ($model->validate()) {
-                
-            }
-            else {
 
-            }
+        $model->load(Yii::$app->request->post());
+        if ($model->validate()) {
+//            $post = new Post();
+//            $post->title = Yii::$app->request->bodyParams['post']['title'];
+//            $post->text = Yii::$app->request->bodyParams['post']['text'];
+            $model->save();
+
+            Yii::$app->session->setFlash('success', 'Пост добавлен');
+            return $this->refresh();
         }
 
+
+        $this->view->title = "Добавление поста";
         return $this->render('form', compact('model'));
     }
 

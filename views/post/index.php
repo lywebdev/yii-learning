@@ -2,10 +2,24 @@
 $this->beginBlock('block1');
     echo "Some Content";
 $this->endBlock();
-$this->registerJsFile('@web/js/posts.js', ['depends' => 'yii\web\YiiAsset']) ?>
+$this->registerJsFile('@web/js/posts.js', ['depends' => 'yii\web\YiiAsset']);
+
+echo "<hr>";
+foreach ($categories as $category) {
+    echo "<h3>{$category->name}</h3>";
+
+    foreach ($category->posts as $post) {
+        echo "<span style='font-weight: bold;'>{$post->title}</span>\n";
+    }
+}
+//foreach ($posts as $post) {
+//    echo "<span style='font-weight: bold;'>{$post->title}</span>\n";
+//}
+?>
+<hr>
 
 <br>
-<button class="btn btn-success" id="getPostsBtn">Получить посты</button>
+<button class="btn btn-success" id="getPostsBtn">Получить посты посредством AJAX</button>
 
 <?php
 $js = <<<JS
